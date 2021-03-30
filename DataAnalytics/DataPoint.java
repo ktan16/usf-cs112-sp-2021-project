@@ -70,7 +70,7 @@ public class DataPoint {
 	}
 	
 	public void setLabel(String label) {
-		if (!(label.equals("Green")||label.equals("Blue"))) {
+		if (!(label.equals("Good")||label.equals("Bad"))) {
 			return;
 		}
 		this.label = label;
@@ -78,6 +78,10 @@ public class DataPoint {
 	
 	public void setIsTest(Boolean isTest) {
 		this.isTest = isTest;
+	}
+	
+	public String toString() {
+		return "f1: " + this.f1 + " f2: " + this.f2 + " label: " + this.label + " isTest: " + this.isTest;
 	}
 	
 
