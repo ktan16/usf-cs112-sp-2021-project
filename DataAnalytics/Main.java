@@ -1,75 +1,76 @@
-package project1;
+package project2;
 
+import java.awt.Container;
+import java.awt.GridLayout;
 import java.util.ArrayList;
-import javax.swing.*;
-import java.awt.*;
+import java.util.InputMismatchException;
 
+import javax.swing.*;
+import java.util.Scanner;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InputMismatchException {
 		
-		DummyPredictor dummy = new DummyPredictor();
-		
-		ArrayList<DataPoint> list = dummy.readData("project.txt");
-		
-//		System.out.println(list);
-		DataPoint trainPoint = list.get(0);
-		DataPoint testPoint = list.get(1);
-		
-		System.out.println(dummy.test(testPoint));
-		System.out.println(dummy.getAccuracy(list));
-		System.out.println(dummy.getPrecision(list));		
-		
-		JFrame frame = new JFrame("Accuracy and Precision");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		Container contentPane = frame.getContentPane();
-		
-		JLabel accuracy = new JLabel("Accuracy: " + dummy.getAccuracy(list));
-		contentPane.add(accuracy);
-		JLabel precision = new JLabel("Precision: " + dummy.getPrecision(list));
-		contentPane.add(precision);
-		
-		frame.setVisible(true);
-		frame.setLayout(new GridLayout(2,1));
-		frame.setSize(400,400);
+		System.out.println("Enter an odd number for k: ");
+		Scanner scanner = new Scanner(System.in);
+//		Integer inputK = scanner.nextInt();
+		if (scanner.hasNextInt()) {
+			
+			int inputK = scanner.nextInt();
+			
+			if (inputK%2 != 0) {
+				KNNPredictor k = new KNNPredictor(inputK);
+				
+				ArrayList<DataPoint> list = k.readData("titanic.csv");
+			
+				//Accuracy and precision changes with each run due to random test and train, or because f1 = pclass f2 = survived
+				System.out.println("Accuracy: " + k.getAccuracy(list));
+				System.out.println("Precision: " + k.getPrecision(list));
 
+				JFrame frame = new JFrame("Accuracy and Precision");
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				
+				Container contentPane = frame.getContentPane();
+				
+				JLabel accuracy = new JLabel("Accuracy: " + k.getAccuracy(list));
+				contentPane.add(accuracy);
+				JLabel precision = new JLabel("Precision: " + k.getPrecision(list));
+				contentPane.add(precision);
+				
+				frame.setVisible(true);
+				frame.setLayout(new GridLayout(2,1));
+				frame.setSize(400,400);
+			} else {
+				System.out.println("Error: Please enter an odd integer.");
+			}
+			
+		} else {
+			System.out.println("Error: Please enter an odd integer.");
+		}
+		
+//		KNNPredictor k = new KNNPredictor(5);
+//		
+//		ArrayList<DataPoint> list = k.readData("titanic.csv");
+//	
+//		System.out.println("Accuracy: " + k.getAccuracy(list));
+//		System.out.println("Precision: " + k.getPrecision(list));
+//
+//		JFrame frame = new JFrame("Accuracy and Precision");
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		
+//		Container contentPane = frame.getContentPane();
+//		
+//		JLabel accuracy = new JLabel("Accuracy: " + k.getAccuracy(list));
+//		contentPane.add(accuracy);
+//		JLabel precision = new JLabel("Precision: " + k.getPrecision(list));
+//		contentPane.add(precision);
+//		
+//		frame.setVisible(true);
+//		frame.setLayout(new GridLayout(2,1));
+//		frame.setSize(400,400);
 		
 		
-//		Scanner scanner = new Scanner(new File("project.txt"));
-//		
-//		DataPoint trainPoint = new DataPoint(scanner.nextDouble(), scanner.nextDouble(), scanner.next(), scanner.nextBoolean());
-//		System.out.println(trainPoint);
-//		
-//		DataPoint testPoint = new DataPoint(scanner.nextDouble(), scanner.nextDouble(), scanner.next(), scanner.nextBoolean());
-//		System.out.println(testPoint);
-//		
-//		DummyPredictor dummy = new DummyPredictor();
-//		
-//		System.out.println(dummy.test(testPoint));
-//		dummy.readData("project.txt");
-		
-		
-//		Random rand = new Random();
-//		
-//		Double trainF1 = rand.nextDouble();
-//		Double trainF2 = rand.nextDouble();
-//		Double testF1 = rand.nextDouble() + 2;
-//		Double testF2 = rand.nextDouble();
-//		
-//		System.out.println(trainF1);
-//		System.out.println(trainF2);
-//		System.out.println(testF1);
-//		System.out.println(testF2);
-//		
-//		DataPoint trainPoint = new DataPoint(trainF1, trainF2, "Bad", false);
-//		DataPoint testPoint = new DataPoint(testF1, testF2, "Good", true);
-//		
-//		System.out.println(trainPoint);
-//		System.out.println(testPoint);
-		
-
 	}
 
 }

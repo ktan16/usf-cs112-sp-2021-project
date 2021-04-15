@@ -1,4 +1,4 @@
-package project1;
+package project2;
 
 public class DataPoint {
 	
@@ -56,23 +56,15 @@ public class DataPoint {
 	 */
 	
 	public void setF1(Double f1) {
-		if (f1<0) {
-			return;
-		}
 		this.f1 = f1;
 	}
 	
 	public void setF2(Double f2) {
-		if (f2<0) {
-			return;
-		}
+
 		this.f2 = f2;
 	}
 	
 	public void setLabel(String label) {
-		if (!(label.equals("Good")||label.equals("Bad"))) {
-			return;
-		}
 		this.label = label;
 	}
 	
